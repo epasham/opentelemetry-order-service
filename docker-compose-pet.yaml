@@ -6,8 +6,6 @@ services:
       OTEL_SERVICE_NAME: "spring-petclinic"
       OTEL_RESOURCE_ATTRIBUTES: "service=spring-petclinic,env=dev"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://collector:4317"
-      # Logs are disabled by default
-      OTEL_LOGS_EXPORTER: "otlp"
     ports:
       - "8080:8080"
     depends_on:
@@ -23,7 +21,6 @@ services:
     restart: always
     ports:
       - "4317" # OTLP gRPC receiver
-      - "8889" # Prometheus exporter metrics
     depends_on:
       - tempo
 
