@@ -3,13 +3,6 @@ server:
 
 distributor:
   receivers:                           # this configuration will listen on all ports and protocols that tempo is capable of.
-    jaeger:                            # the receives all come from the OpenTelemetry collector.  more configuration information can
-      protocols:                       # be found there: https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver
-        thrift_http:                   #
-        grpc:                          # for a production deployment you should only enable the receivers you need!
-        thrift_binary:
-        thrift_compact:
-    zipkin:
     otlp:
       protocols:
         http:
@@ -23,16 +16,6 @@ compactor:
   compaction:
     block_retention: 1h                # overall Tempo trace retention. set for demo purposes
 
-metrics_generator:
-  registry:
-    external_labels:
-      source: tempo
-      cluster: docker-compose
-  storage:
-    path: /tmp/tempo/generator/wal
-    remote_write:
-      - url: http://prometheus:9090/api/v1/write
-        send_exemplars: true
 
 storage:
   trace:
@@ -42,5 +25,3 @@ storage:
     local:
       path: /tmp/tempo/blocks
 
-overrides:
-  metrics_generator_processors: [service-graphs, span-metrics] # enables metrics generator
