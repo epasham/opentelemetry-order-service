@@ -9,7 +9,6 @@ receivers:
             - "https://*"
 
 exporters:
-  debug:
   otlp:
     endpoint: tempo:4317
     tls:
@@ -23,4 +22,4 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp, debug]
+      exporters: [otlp]
