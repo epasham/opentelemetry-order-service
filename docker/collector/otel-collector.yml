@@ -3,24 +3,11 @@ receivers:
     protocols:
       grpc:
 
-processors:
-  # batch metrics before sending to reduce API usage
-  batch:
-    send_batch_max_size: 1000
-    send_batch_size: 100
-    timeout: 10s
-
 exporters:
-  otlp/tempo:
+  otlp:
     endpoint: tempo:4317
     tls:
       insecure: true
-
-  # log to the console 
-  logging:
-    verbosity: detailed
-    sampling_initial: 5
-    sampling_thereafter: 200
 
 extensions:
   # responsible for responding to health check calls on behalf of the collector.
@@ -33,5 +20,4 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]
-      exporters: [logging]
+      exporters: [otlp]
