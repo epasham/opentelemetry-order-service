@@ -12,6 +12,10 @@ processors:
     timeout: 10s
 
 exporters:
+  logging/info:
+    loglevel: INFO
+  logging/debug:
+    loglevel: DEBUG
   otlp/tempo:
     endpoint: tempo:4317
     tls:
