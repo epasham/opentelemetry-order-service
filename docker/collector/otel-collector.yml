@@ -17,6 +17,12 @@ exporters:
     tls:
       insecure: true
 
+  # log to the console 
+  logging:
+    verbosity: detailed
+    sampling_initial: 5
+    sampling_thereafter: 200
+
 extensions:
   # responsible for responding to health check calls on behalf of the collector.
   health_check:
@@ -29,4 +35,4 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/tempo]
+      exporters: [logging]
