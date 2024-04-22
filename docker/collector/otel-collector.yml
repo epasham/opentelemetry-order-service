@@ -9,14 +9,7 @@ exporters:
     tls:
       insecure: true
 
-extensions:
-  # responsible for responding to health check calls on behalf of the collector.
-  health_check:
-  # fetches the collector’s performance data
-  pprof:
-
 service:
-  extensions: [health_check, pprof]
   pipelines:
     traces:
       receivers: [otlp]
