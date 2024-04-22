@@ -6,7 +6,7 @@ services:
       - POSTGRES_URL=jdbc:postgresql://postgres:5432/petclinic
       - SPRING_PROFILES_ACTIVE=postgres
       - OTEL_SERVICE_NAME=petclinic
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://collector:4318
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://collector:4318/v1/traces
     ports:
       - "8080:8080"
     depends_on:
