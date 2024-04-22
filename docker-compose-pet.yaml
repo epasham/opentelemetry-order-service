@@ -6,14 +6,14 @@ services:
       - POSTGRES_URL=jdbc:postgresql://postgres:5432/petclinic
       - SPRING_PROFILES_ACTIVE=postgres
       - OTEL_SERVICE_NAME=petclinic
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://collector:4317
     ports:
       - "8080:8080"
     depends_on:
       - postgres
-      - otel-collector
+      - collector
 
-  otel-collector:
+  collector:
     container_name: collector
     image: otel/opentelemetry-collector:0.86.0
     command: [ "--config=/etc/otel-collector.yml" ]
