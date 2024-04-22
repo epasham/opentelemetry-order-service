@@ -24,6 +24,7 @@ services:
     restart: always
     ports:
       - "4317" # OTLP gRPC receiver
+      - "4318"
     depends_on:
       - tempo
 
