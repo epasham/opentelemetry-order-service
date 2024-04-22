@@ -8,7 +8,7 @@ services:
       - OTEL_SERVICE_NAME=petclinic
       - OTEL_RESOURCE_ATTRIBUTES=service=petclinic,env=dev
       - OTEL_EXPORTER_OTLP_TRACES_PROTOCOL=grpc
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://collector:4317
+      - OTEL_EXPORTER_OTLP_ENDPOINT=collector:4317
     ports:
       - "8080:8080"
     depends_on:
