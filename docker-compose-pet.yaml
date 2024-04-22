@@ -14,9 +14,9 @@ services:
       - otel-collector
 
   otel-collector:
+    container_name: collector
     image: otel/opentelemetry-collector:0.86.0
-    command:
-      - --config=/etc/otel-collector.yml
+    command: [ "--config=/etc/otel-collector.yml" ]
     volumes:
       - ./docker/collector/otel-collector.yml:/etc/otel-collector.yml
     restart: always
