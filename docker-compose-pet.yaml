@@ -1,14 +1,17 @@
 version: '3'
 services:
   spring-petclinic:
-    image: signoz/spring-petclinic:latest
+    image: ekambaram/spring-petclinic:otel
     environment:
-      OTEL_SERVICE_NAME: "spring-petclinic"
-      OTEL_RESOURCE_ATTRIBUTES: "service=spring-petclinic,env=dev"
-      OTEL_EXPORTER_OTLP_ENDPOINT: "http://collector:4317"
+      - POSTGRES_URL=jdbc:postgresql://postgres:5432/petclinic
+      - SPRING_PROFILES_ACTIVE=postgres
+      - OTEL_SERVICE_NAME=petclinic
+      - OTEL_RESOURCE_ATTRIBUTES=service=petclinic,env=dev
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://collector:4317
     ports:
       - "8080:8080"
     depends_on:
+      - postgres
       - collector
 
   collector:
@@ -46,3 +49,18 @@ services:
       - "3000:3000"
     depends_on:
       - tempo
+
+    postgres:
+    image: postgres:16.1
+    environment:
+      - POSTGRES_PASSWORD=petclinic
+      - POSTGRES_USER=petclinic
+      - POSTGRES_DB=petclinic
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
