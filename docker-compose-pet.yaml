@@ -56,7 +56,8 @@ services:
     depends_on:
       - tempo
 
-    postgres:
+  postgres:
+    container_name: postgres
     image: postgres:16.1
     environment:
       - POSTGRES_PASSWORD=petclinic
